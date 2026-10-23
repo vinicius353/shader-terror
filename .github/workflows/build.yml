@@ -88,7 +88,10 @@ jobs:
       - name: Montar o pack (.mcpack)
         run: |
           mkdir -p pack/renderer/materials
-          FOUND=$(find work/projeto -maxdepth 2 -name '*.material.bin' -not -path '*/vanilla/*')
+          echo "--- todos os .material.bin do servidor:"
+          find . -name '*.material.bin' -not -path './pack/*' | tee todos.txt
+          FOUND=$(grep -v '/vanilla/' todos.txt || true)
+          echo "--- usando:"
           echo "$FOUND"
           [ -n "$FOUND" ] || { echo "Nenhum .material.bin foi gerado"; exit 1; }
           for f in $FOUND; do cp "$f" pack/renderer/materials/; done
