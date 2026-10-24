@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "projeto.zip"
+      - ".github/workflows/build.yml"
 
 permissions:
   contents: write
@@ -28,6 +29,7 @@ jobs:
 
       - name: Baixar o compilador shaderc (bgfx-mcbe)
         run: |
+          exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           set -x
           mkdir -p dl
           pick() {
@@ -56,12 +58,14 @@ jobs:
 
       - name: Descompactar o projeto
         run: |
+          exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           mkdir -p work
           unzip -oq projeto.zip -d work
           ls -R work | head -50
 
       - name: Preparar os shaders (bgfx_shader.sh e horror.sh)
         run: |
+          exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           URL="https://raw.githubusercontent.com/SurvivalApparatusCommunication/RenderDragonSourceCodeInv/1.20.60/include/bgfx_shader.sh"
           mkdir -p work/_common
           mv work/projeto/_common/horror.sh work/_common/horror.sh
@@ -75,7 +79,6 @@ jobs:
       - name: Compilar com o lazurite (testa varias versoes)
         run: |
           set +e
-          : > build.log
           for SPEC in "lazurite==0.10.0" "lazurite" "git+https://github.com/veka0/lazurite.git"; do
             echo "=================== Tentando: $SPEC" | tee -a build.log
             pip install --quiet --upgrade --force-reinstall "$SPEC" 2>&1 | tail -3 | tee -a build.log
@@ -91,6 +94,7 @@ jobs:
 
       - name: Montar o pack (.mcpack)
         run: |
+          exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           mkdir -p pack/renderer/materials
           echo "--- todos os .material.bin do servidor:"
           find . -name '*.material.bin' -not -path './pack/*' | tee todos.txt
@@ -128,6 +132,17 @@ jobs:
           PY
           cd pack && zip -qr ../terror-lanterna.mcpack . && cd ..
           ls -l terror-lanterna.mcpack
+
+      - name: Salvar o log no repositorio
+        if: always()
+        run: |
+          mkdir -p logs
+          cp build.log logs/build.log || echo "sem log" > logs/build.log
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add logs/build.log
+          git commit -m "log do build ${{ github.run_number }}" || true
+          git push || true
 
       - name: Guardar arquivos do build
         if: always()
