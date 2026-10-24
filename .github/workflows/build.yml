@@ -60,13 +60,17 @@ jobs:
           unzip -oq projeto.zip -d work
           ls -R work | head -50
 
-      - name: Baixar bgfx_shader.sh
+      - name: Preparar os shaders (bgfx_shader.sh e horror.sh)
         run: |
           URL="https://raw.githubusercontent.com/SurvivalApparatusCommunication/RenderDragonSourceCodeInv/1.20.60/include/bgfx_shader.sh"
-          for M in RenderChunk Sky; do
-            curl -fsSL "$URL" -o "work/projeto/$M/shaders/bgfx_shader.sh"
+          mkdir -p work/_common
+          mv work/projeto/_common/horror.sh work/_common/horror.sh
+          rmdir work/projeto/_common
+          for d in work/projeto/*/shaders; do
+            curl -fsSL "$URL" -o "$d/bgfx_shader.sh"
+            cp work/_common/horror.sh "$d/horror.sh"
           done
-          ls -l work/projeto/*/shaders/
+          ls work/projeto
 
       - name: Compilar com o lazurite (testa varias versoes)
         run: |
@@ -102,14 +106,14 @@ jobs:
               "name": "Terror Lanterna (leve)",
               "description": "Shader leve de terror: escuridao e lanterna",
               "uuid": "dbaa9952-1dd4-48c7-8244-2b66ae1fde49",
-              "version": [0, 1, 0],
+              "version": [0, 2, 0],
               "min_engine_version": [1, 21, 0]
             },
             "modules": [
               {
                 "type": "resources",
                 "uuid": "6e425064-cc52-4077-9056-4c2bd57d3e9c",
-                "version": [0, 1, 0]
+                "version": [0, 2, 0]
               }
             ]
           }
