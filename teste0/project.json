@@ -1,0 +1,7 @@
+{
+  "base_profile": {
+    "platforms": ["ESSL_310"],
+    "merge_source": ["vanilla"]
+  },
+  "profiles": {}
+}
