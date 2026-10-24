@@ -3,9 +3,9 @@
 // =====================================================
 #define H_AMBIENT_DEFAULT 0.10   // luz geral fora da lanterna (0 = breu, 0.3 = penumbra)
 #define H_BEAM_POWER      1.70   // forca da lanterna
-#define H_BEAM_RANGE      26.0   // alcance da lanterna em blocos
-#define H_CONE_INNER      0.16   // largura do centro do cone
-#define H_CONE_OUTER      0.52   // borda suave do cone
+#define H_BEAM_RANGE      52.0   // alcance da lanterna em blocos
+#define H_CONE_INNER      0.30   // largura do centro do cone
+#define H_CONE_OUTER      0.90   // borda suave do cone
 #define H_SATURATION      0.55   // 1 = cores normais, 0 = preto e branco
 #define H_FOG_DARK        vec3(0.008, 0.010, 0.014)   // cor da neblina escura
 #define H_SKY_DARKEN      0.03   // quanto do ceu original aparece de noite
@@ -34,5 +34,5 @@ float horrorBeam(vec3 viewPos) {
     float tanAngle = length(viewPos.xy) / depthAlong;
     float cone = 1.0 - smoothstep(H_CONE_INNER, H_CONE_OUTER, tanAngle);
     float reach = clamp(1.0 - dist / H_BEAM_RANGE, 0.0, 1.0);
-    return cone * reach * reach;
+    return cone * reach * (0.45 + 0.55 * reach);   // queda de luz suave
 }
