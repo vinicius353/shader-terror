@@ -26,8 +26,8 @@ src-materials-1.26.40.zip
 src-materials-1.26.51.zip
 ++ grep -i shaderc dl/assets.txt
 ++ grep -iv -e arm -e aarch
-++ grep -i linux
 ++ head -n1
+++ grep -i linux
 + NAME=shaderc-linux-x64
 + '[' -z shaderc-linux-x64 ']'
 + '[' -z shaderc-linux-x64 ']'
@@ -129,7 +129,7 @@ Sky
 Weather
 vanilla
 Warning! Failed to find merge source for vanilla
-Completed in 3.45 seconds
+Completed in 3.52 seconds
 SUCESSO com lazurite==0.10.0
 ######## FASE 0 ########
 FALTA o arquivo ColorPostProcessing_material.bin na raiz do repositorio
@@ -140,13 +140,13 @@ FALTA o arquivo BlitColor_material.bin na raiz do repositorio
 total 0
 sem base: teste pulado
 --- tamanhos (compilado em work/, base em work/projeto/vanilla/):
--rw-r--r-- 1 runner runner 3740368 Oct 24 15:31 work/Actor.material.bin
--rw-r--r-- 1 runner runner  411171 Oct 24 15:31 work/ItemInHandColor.material.bin
--rw-r--r-- 1 runner runner  426928 Oct 24 15:31 work/ItemInHandTextured.material.bin
--rw-r--r-- 1 runner runner   36182 Oct 24 15:31 work/Particle.material.bin
--rw-r--r-- 1 runner runner  558638 Oct 24 15:31 work/RenderChunk.material.bin
--rw-r--r-- 1 runner runner   16547 Oct 24 15:31 work/Sky.material.bin
--rw-r--r-- 1 runner runner  184956 Oct 24 15:31 work/Weather.material.bin
+-rw-r--r-- 1 runner runner 3745408 Oct 24 15:42 work/Actor.material.bin
+-rw-r--r-- 1 runner runner  411731 Oct 24 15:42 work/ItemInHandColor.material.bin
+-rw-r--r-- 1 runner runner  427488 Oct 24 15:42 work/ItemInHandTextured.material.bin
+-rw-r--r-- 1 runner runner   36238 Oct 24 15:42 work/Particle.material.bin
+-rw-r--r-- 1 runner runner  559154 Oct 24 15:42 work/RenderChunk.material.bin
+-rw-r--r-- 1 runner runner   16931 Oct 24 15:42 work/Sky.material.bin
+-rw-r--r-- 1 runner runner  185180 Oct 24 15:42 work/Weather.material.bin
 -rw-r--r-- 1 runner runner 4709234 Oct 24 10:15 work/projeto/vanilla/Actor.material.bin
 -rw-r--r-- 1 runner runner  475117 Oct 24 10:15 work/projeto/vanilla/ItemInHandColor.material.bin
 -rw-r--r-- 1 runner runner  515158 Oct 24 10:15 work/projeto/vanilla/ItemInHandTextured.material.bin
@@ -154,7 +154,7 @@ sem base: teste pulado
 -rw-r--r-- 1 runner runner 1080232 Oct 23 22:03 work/projeto/vanilla/RenderChunk.material.bin
 -rw-r--r-- 1 runner runner    8062 Oct 23 22:03 work/projeto/vanilla/Sky.material.bin
 -rw-r--r-- 1 runner runner  293796 Oct 24 10:15 work/projeto/vanilla/Weather.material.bin
--rw-r--r-- 1 runner runner      83 Oct 24 15:31 work/vanilla.material.bin
+-rw-r--r-- 1 runner runner      83 Oct 24 15:42 work/vanilla.material.bin
 --- todos os .material.bin do servidor:
 work/Particle.material.bin
 work/ItemInHandTextured.material.bin
@@ -172,4 +172,4 @@ work/RenderChunk.material.bin
 work/ItemInHandColor.material.bin
 work/Weather.material.bin
 work/Actor.material.bin
--rw-r--r-- 1 runner runner 101461 Oct 24 15:31 terror-lanterna.mcpack
+-rw-r--r-- 1 runner runner 101512 Oct 24 15:42 terror-lanterna.mcpack
