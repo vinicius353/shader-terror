@@ -8,6 +8,7 @@ on:
       - ".github/workflows/build.yml"
       - "fonte/**"
       - "teste0/**"
+      - "*_material.bin"
 
 permissions:
   contents: write
@@ -80,6 +81,10 @@ jobs:
           done
           # shaders de vertice nao podem usar gl_FragCoord: usam so a parte comum
           sed -i 's|#include <horror.sh>|#include <horror_common.sh>|' work/projeto/*/shaders/vertex.sc
+          # olho de peixe: todo gl_Position passa por lensWarp() (ver _common/lens.sh)
+          sed -i 's|#include <bgfx_shader.sh>|#include <bgfx_shader.sh>\n#include <lens.sh>|' work/projeto/*/shaders/vertex.sc
+          sed -i -E 's/^(\s*)gl_Position = (.*);$/\1gl_Position = lensWarp(\2);/' work/projeto/*/shaders/vertex.sc
+          grep -c "lensWarp" work/projeto/*/shaders/vertex.sc
           ls work/projeto
 
       - name: Compilar com o lazurite (testa varias versoes)
@@ -104,22 +109,24 @@ jobs:
           exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           echo "######## FASE 0 ########"
           [ -d teste0 ] || { echo "sem pasta teste0"; exit 0; }
-          mkdir -p w0/src
-          gh release download dev -R devendrn/newb-shader -p 'src-materials-1.26.51.zip' -D w0 --clobber
-          unzip -oq w0/src-materials-1.26.51.zip -d w0/src
-          echo "--- conteudo do src-materials:"
-          find w0/src -maxdepth 3 | head -60
+          mkdir -p w0
           cp -r teste0 w0/proj
           mkdir -p w0/proj/vanilla
           for n in ColorPostProcessing GammaScreenColorPostProcessing Blit BlitColor; do
-            find w0/src -iname "$n.material.*" -exec cp {} w0/proj/vanilla/ \;
+            if [ -f "${n}_material.bin" ]; then
+              cp "${n}_material.bin" "w0/proj/vanilla/${n}.material.bin"
+            else
+              echo "FALTA o arquivo ${n}_material.bin na raiz do repositorio"
+            fi
             curl -fsSL "$BGFX_URL" -o "w0/proj/$n/shaders/bgfx_shader.sh"
           done
-          echo "--- base copiada:"
+          echo "--- base do teste:"
           ls -l w0/proj/vanilla
+          [ "$(ls w0/proj/vanilla | wc -l)" -ge 1 ] || { echo "sem base: teste pulado"; exit 0; }
           lazurite build w0/proj
           mkdir -p pack0/renderer/materials
           for f in $(find w0 -maxdepth 2 -name '*.material.bin' -not -path '*/vanilla/*' -not -name 'vanilla*'); do cp "$f" pack0/renderer/materials/; done
+          echo "--- materiais do pack de teste:"
           ls -l pack0/renderer/materials
           cat > pack0/manifest.json <<'JSON'
           {
@@ -128,14 +135,14 @@ jobs:
               "name": "TESTE Fase 0 (cores)",
               "description": "Magenta=ColorPostProcessing Verde=Gamma Ciano=Blit Amarelo=BlitColor",
               "uuid": "a3f1c2d4-7b58-4e19-9a60-1d2c3b4e5f60",
-              "version": [0, 0, 1],
+              "version": [0, 0, 2],
               "min_engine_version": [1, 21, 0]
             },
             "modules": [
               {
                 "type": "resources",
                 "uuid": "b4e2d3c5-8c69-4f2a-8b71-2e3d4c5f6071",
-                "version": [0, 0, 1]
+                "version": [0, 0, 2]
               }
             ]
           }
@@ -161,16 +168,16 @@ jobs:
             "format_version": 2,
             "header": {
               "name": "Terror Lanterna (leve)",
-              "description": "Shader leve de terror: lanterna a noite + efeito VHS",
+              "description": "Shader leve de terror: lanterna a noite + VHS + olho de peixe",
               "uuid": "dbaa9952-1dd4-48c7-8244-2b66ae1fde49",
-              "version": [0, 3, 0],
+              "version": [0, 4, 0],
               "min_engine_version": [1, 21, 0]
             },
             "modules": [
               {
                 "type": "resources",
                 "uuid": "6e425064-cc52-4077-9056-4c2bd57d3e9c",
-                "version": [0, 3, 0]
+                "version": [0, 4, 0]
               }
             ]
           }
