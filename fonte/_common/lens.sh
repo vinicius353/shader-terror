@@ -1,6 +1,6 @@
 // Olho de peixe (so shaders de VERTICE). Deforma a posicao final na tela.
 // LENS_STRENGTH: 0 = desligado, 0.10 = leve, 0.20 = forte, 0.30 = muito forte
-#define LENS_STRENGTH 0.16
+#define LENS_STRENGTH 0.22
 
 vec4 lensWarp(vec4 c) {
     if (LENS_STRENGTH <= 0.0 || c.w <= 0.0001) {
