@@ -96,9 +96,11 @@ jobs:
         run: |
           exec > >(tee -a "$GITHUB_WORKSPACE/build.log") 2>&1
           mkdir -p pack/renderer/materials
+          echo "--- tamanhos (compilado em work/, base em work/projeto/vanilla/):"
+          ls -l work/*.material.bin work/projeto/vanilla/*.material.bin
           echo "--- todos os .material.bin do servidor:"
           find . -name '*.material.bin' -not -path './pack/*' | tee todos.txt
-          FOUND=$(grep -v '/vanilla/' todos.txt || true)
+          FOUND=$(grep -v 'vanilla' todos.txt || true)
           echo "--- usando:"
           echo "$FOUND"
           [ -n "$FOUND" ] || { echo "Nenhum .material.bin foi gerado"; exit 1; }
