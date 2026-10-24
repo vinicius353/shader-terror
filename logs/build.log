@@ -98,6 +98,13 @@ vertex.sc
 work/projeto/RenderChunk:
 shaders
 
+work/projeto/Actor/shaders/vertex.sc:5
+work/projeto/ItemInHandColor/shaders/vertex.sc:5
+work/projeto/ItemInHandTextured/shaders/vertex.sc:5
+work/projeto/Particle/shaders/vertex.sc:2
+work/projeto/RenderChunk/shaders/vertex.sc:1
+work/projeto/Sky/shaders/vertex.sc:1
+work/projeto/Weather/shaders/vertex.sc:1
 Actor
 ItemInHandColor
 ItemInHandTextured
@@ -122,47 +129,24 @@ Sky
 Weather
 vanilla
 Warning! Failed to find merge source for vanilla
-Completed in 3.42 seconds
+Completed in 3.45 seconds
 SUCESSO com lazurite==0.10.0
 ######## FASE 0 ########
---- conteudo do src-materials:
-w0/src
-w0/src/EndSky.material.json
-w0/src/ActorGlint.material.json
-w0/src/Weather.material.json
-w0/src/RenderChunk.material.json
-w0/src/ItemInHandColorGlint.material.json
-w0/src/ActorMultiTexture.material.json
-w0/src/ItemInHandTextured.material.json
-w0/src/Sky.material.json
-w0/src/SunMoon.material.json
-w0/src/ItemInHandColor.material.json
-w0/src/Actor.material.json
-w0/src/Clouds.material.json
-w0/src/Stars.material.json
---- base copiada:
+FALTA o arquivo ColorPostProcessing_material.bin na raiz do repositorio
+FALTA o arquivo GammaScreenColorPostProcessing_material.bin na raiz do repositorio
+FALTA o arquivo Blit_material.bin na raiz do repositorio
+FALTA o arquivo BlitColor_material.bin na raiz do repositorio
+--- base do teste:
 total 0
-Compiling project "w0/proj"
-Blit
-BlitColor
-ColorPostProcessing
-GammaScreenColorPostProcessing
-vanilla
-Completed in 0.0 seconds
-total 16
--rw-r--r-- 1 runner runner 83 Oct 24 15:30 Blit.material.bin
--rw-r--r-- 1 runner runner 83 Oct 24 15:30 BlitColor.material.bin
--rw-r--r-- 1 runner runner 83 Oct 24 15:30 ColorPostProcessing.material.bin
--rw-r--r-- 1 runner runner 83 Oct 24 15:30 GammaScreenColorPostProcessing.material.bin
--rw-r--r-- 1 runner runner 1908 Oct 24 15:30 teste-fase0.mcpack
+sem base: teste pulado
 --- tamanhos (compilado em work/, base em work/projeto/vanilla/):
--rw-r--r-- 1 runner runner 3638848 Oct 24 15:30 work/Actor.material.bin
--rw-r--r-- 1 runner runner  399891 Oct 24 15:30 work/ItemInHandColor.material.bin
--rw-r--r-- 1 runner runner  415648 Oct 24 15:30 work/ItemInHandTextured.material.bin
--rw-r--r-- 1 runner runner   35054 Oct 24 15:30 work/Particle.material.bin
--rw-r--r-- 1 runner runner  541718 Oct 24 15:30 work/RenderChunk.material.bin
--rw-r--r-- 1 runner runner   15983 Oct 24 15:30 work/Sky.material.bin
--rw-r--r-- 1 runner runner  180444 Oct 24 15:30 work/Weather.material.bin
+-rw-r--r-- 1 runner runner 3740368 Oct 24 15:31 work/Actor.material.bin
+-rw-r--r-- 1 runner runner  411171 Oct 24 15:31 work/ItemInHandColor.material.bin
+-rw-r--r-- 1 runner runner  426928 Oct 24 15:31 work/ItemInHandTextured.material.bin
+-rw-r--r-- 1 runner runner   36182 Oct 24 15:31 work/Particle.material.bin
+-rw-r--r-- 1 runner runner  558638 Oct 24 15:31 work/RenderChunk.material.bin
+-rw-r--r-- 1 runner runner   16547 Oct 24 15:31 work/Sky.material.bin
+-rw-r--r-- 1 runner runner  184956 Oct 24 15:31 work/Weather.material.bin
 -rw-r--r-- 1 runner runner 4709234 Oct 24 10:15 work/projeto/vanilla/Actor.material.bin
 -rw-r--r-- 1 runner runner  475117 Oct 24 10:15 work/projeto/vanilla/ItemInHandColor.material.bin
 -rw-r--r-- 1 runner runner  515158 Oct 24 10:15 work/projeto/vanilla/ItemInHandTextured.material.bin
@@ -170,7 +154,7 @@ total 16
 -rw-r--r-- 1 runner runner 1080232 Oct 23 22:03 work/projeto/vanilla/RenderChunk.material.bin
 -rw-r--r-- 1 runner runner    8062 Oct 23 22:03 work/projeto/vanilla/Sky.material.bin
 -rw-r--r-- 1 runner runner  293796 Oct 24 10:15 work/projeto/vanilla/Weather.material.bin
--rw-r--r-- 1 runner runner      83 Oct 24 15:30 work/vanilla.material.bin
+-rw-r--r-- 1 runner runner      83 Oct 24 15:31 work/vanilla.material.bin
 --- todos os .material.bin do servidor:
 work/Particle.material.bin
 work/ItemInHandTextured.material.bin
@@ -188,4 +172,4 @@ work/RenderChunk.material.bin
 work/ItemInHandColor.material.bin
 work/Weather.material.bin
 work/Actor.material.bin
--rw-r--r-- 1 runner runner 98166 Oct 24 15:30 terror-lanterna.mcpack
+-rw-r--r-- 1 runner runner 101461 Oct 24 15:31 terror-lanterna.mcpack
